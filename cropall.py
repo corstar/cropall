@@ -216,7 +216,16 @@ class MyApp(Tk):
 		self.aspect[0].trace("w", self.on_aspect_changed)
 		self.aspect[1].trace("w", self.on_aspect_changed)
 		self.restrictSizes.trace("w", self.on_option_changed)
+		self.bind('<BackSpace>', self.backspace_key)
 		self.bind('<space>', self.save_next)
+		self.bind('<Up>', self.up_key)
+		self.bind('<Left>', self.left_key)
+		self.bind('<Right>', self.right_key)
+		self.bind('<Down>', self.down_key)
+		self.bind('<Control-Up>', self.control_up_key)
+		self.bind('<Control-Left>', self.control_left_key)
+		self.bind('<Control-Right>', self.control_right_key)
+		self.bind('<Control-Down>', self.control_down_key)
 		self.c.bind('<ButtonPress-1>', self.on_mouse_down)
 		self.c.bind('<B1-Motion>', self.on_mouse_drag)
 		self.c.bind('<ButtonRelease-1>', self.on_mouse_up)
@@ -463,6 +472,26 @@ class MyApp(Tk):
 		self.y = event.y
 		self.update_box(event.widget)
 
+	def up_key(self, event):
+		self.y -= 1
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
+	def left_key(self, event):
+		self.x -= 1
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
+	def down_key(self, event):
+		self.y += 1
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
+	def right_key(self, event):
+		self.x += 1
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
 	def on_mouse_drag(self, event):
 		self.x = event.x
 		self.y = event.y
@@ -471,6 +500,28 @@ class MyApp(Tk):
 	def on_mouse_up(self, event):
 		self.update_preview(event.widget)
 
+	def control_up_key(self, event):
+		self.y -= 5 
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
+	def control_left_key(self, event):
+		self.x -= 5
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
+	def control_down_key(self, event):
+		self.y += 5
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
+	def control_right_key(self, event):
+		self.x += 5
+		self.update_box(event.widget)
+		self.update_preview(event.widget)
+
+	def backspace_key(self, event):
+		self.previous()
 
 app =  MyApp()
 app.mainloop()
