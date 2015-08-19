@@ -21,8 +21,8 @@ image_extensions = [".jpg", ".png", ".bmp"]
 out_directory = "crops"
 
 #after cropping, will resize down until the image firs in these dimensions. set to 0 to disable
-resize_width = 1920
-resize_height = 1080
+resize_width = 0 
+resize_height = 0 
 
 #uses low resolution to show crop (real image will look better than preview)
 fast_preview = True
