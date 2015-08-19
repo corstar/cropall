@@ -113,6 +113,7 @@ class MyApp(Tk):
 			b, e = os.path.splitext(i)
 			if e.lower() not in image_extensions: continue
 			allImages += [i]
+		allImages.sort()
 		return allImages
 
 	def __init__(self):
