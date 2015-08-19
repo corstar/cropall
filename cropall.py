@@ -385,7 +385,7 @@ class MyApp(Tk):
 		#bbox = (widget.canvasx(bbox[0]), widget.canvasy(bbox[1]), widget.canvasx(bbox[2]), widget.canvasy(bbox[3]))
 							
 		if self.item is None:
-			self.item = widget.create_rectangle(bbox, outline="yellow")
+			self.item = widget.create_rectangle(bbox, outline="red")
 		else:
 			widget.coords(self.item, *bbox)
 			
