@@ -256,10 +256,12 @@ class MyApp(Tk):
 		imh = self.imageOrigSize[1]
 		prevw = self.imagePhoto.width()
 		prevh = self.imagePhoto.height()
-		box = (int(round(self.x*imw/prevw))-w//2, int(round(self.y*imh/prevh))-h//2)
+		# box = (int(round(self.x*imw/prevw))-w//2, int(round(self.y*imh/prevh))-h//2)
+		box = (int(round(self.x*imw/prevw))-w, int(round(self.y*imh/prevh)))
 		box = (max(box[0], 0), max(box[1], 0))
 		box = (min(box[0]+w, imw)-w, min(box[1]+h, imh)-h)
 		box = (box[0], box[1], box[0]+w, box[1]+h)
+		print "top: " + str(box[0]) + ", left: " + str(box[1]) + ", width: " + str(w) + ", height: " + str(h)
 		return box
 	
 	def getPreviewBox(self):
