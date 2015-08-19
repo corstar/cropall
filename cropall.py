@@ -401,7 +401,12 @@ class MyApp(Tk):
 		if self.item is None:
 			self.item = widget.create_rectangle(bbox, outline="red")
 		else:
-			widget.coords(self.item, *bbox)
+			try:
+				widget.coords(self.item, *bbox)
+				self.canvas = widget
+			except AttributeError:
+				# this was updated via keyboard
+				self.canvas.coords(self.item, *bbox)
 			
 	def update_preview(self, widget):
 		if self.item:
