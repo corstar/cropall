@@ -162,6 +162,10 @@ class MyApp(Tk):
 		self.x = 0
 		self.y = 0
 		self.current = 0
+		self.cropdiv = 1.06 
+		self.previewBoxWidget = None
+		self.originalBoxWidget = None
+		self.canvas = None
 
 		#self.main = ScrolledCanvas(self)
 		#self.main.grid(row=0, column=0, sticky='nsew')
@@ -244,10 +248,11 @@ class MyApp(Tk):
 		self.previous()
 	
 	def updateCropSize(self):
-		if self.cropIndex <= 4:
-			self.cropdiv = 8.0 / (9.0 - self.cropIndex)
-		else:
-			self.cropdiv = (1 + (self.cropIndex - 1) * 0.25)
+		return True
+		# if self.cropIndex <= 4:
+			#self.cropdiv = 8.0 / (9.0 - self.cropIndex)
+		# else:
+			#self.cropdiv = (1 + (self.cropIndex - 1) * 0.25)
 
 	def getCropSize(self):
 		self.updateCropSize()
@@ -445,25 +450,35 @@ class MyApp(Tk):
 		allow_fractional_size = (self.restrictSizes.get() == 0)
 	
 	def on_mouse_scroll(self, event):
+		SCROLL_UP = 1
+		SCROLL_DOWN = -1
+
 		if event.num == 5 or event.delta < 0:
-			dir = -1
+			dir = SCROLL_DOWN
 		if event.num == 4 or event.delta > 0:
-			dir = 1
+			dir = SCROLL_UP
 		
-		if dir == 1:
+		if dir == SCROLL_UP:
+			self.cropdiv += 0.01
+			if self.cropdiv > 2.0:
+				self.cropdiv = 2.0
+
 			while self.cropIndex < self.imagePhoto.width():
 				self.cropIndex += 1
 				if self.test(): break
-		if dir == -1:
-			if self.cropIndex == 1:
-				print "At maximum"
-				return
-			while self.cropIndex > 1:
-				self.cropIndex -= 1
-				if self.test(): break
+		if dir == SCROLL_DOWN:
+			self.cropdiv -= 0.01
+			if self.cropdiv < 0.1:
+				self.cropdiv = 0.1
+
+			# if self.cropIndex == 1:
+			# 	print "At maximum"
+			# 	return
+			# while self.cropIndex > 1:
+			# 	self.cropIndex -= 1
+			# 	if self.test(): break
 				
-		print self.cropIndex
-		
+		print str(self.cropdiv)
 		self.update_box(self.imageLabel)
 		self.update_preview(self.imageLabel)
 	
