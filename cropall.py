@@ -323,7 +323,12 @@ class MyApp(Tk):
 		fullFilename = os.path.join(self.inDir, filename)
 		print "Loading " + fullFilename
 		img = Image.open(fullFilename)
-		
+		outputFilename = os.path.join(self.outDir, filename)
+
+		if os.path.exists(outputFilename):
+			print outputFilename + " already exists"
+			return
+
 		self.imageOrig = img
 		self.imageOrigSize = (img.size[0], img.size[1])
 		print "Image is " + str(self.imageOrigSize[0]) + "x" + str(self.imageOrigSize[1])
