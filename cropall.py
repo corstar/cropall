@@ -182,8 +182,8 @@ class MyApp(Tk):
 		
 		self.inputs = []
 		self.aspect = (StringVar(), StringVar())
-		self.aspect[0].set("Ratio X")
-		self.aspect[1].set("Ratio Y")
+		self.aspect[0].set("8.5")
+		self.aspect[1].set("11")
 		self.inputs += [Entry(self.controls, textvariable=self.aspect[0])]
 		self.inputs[-1].grid(row=0, column=1, sticky="nsew")
 		self.inputs += [Entry(self.controls, textvariable=self.aspect[1])]
