@@ -363,8 +363,8 @@ class MyApp(Tk):
 			c += " -resize \"" + str(resize_width) + "x" + str(resize_height) + ">\""
 		c += " \"" + self.output_full_filepath() + "\""
 		print "Running: " + c
-		subprocess.call(c, shell=True)
-		self.deskew(False)
+		subprocess.Popen(c, shell=True)
+		# self.deskew(False)
 		self.next()
 
 	def deskew(self, load = True):
